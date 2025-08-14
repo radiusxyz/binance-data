@@ -146,7 +146,8 @@ func processSymbol(symbol string, rl *RateLimiter) {
 func groupTradesByDate(trades []AggTrade) map[string][][]string {
 	grouped := make(map[string][][]string)
 	for _, trade := range trades {
-		t := time.UnixMilli(trade.Timestamp).In(time.FixedZone("KST", 9*60*60))
+		//t := time.UnixMilli(trade.Timestamp).In(time.FixedZone("KST", 9*60*60))
+		t := time.UnixMilli(trade.Timestamp).UTC()
 		dateStr := t.Format("2006-01-02")
 		record := []string{
 			strconv.FormatInt(trade.TradeId, 10),
@@ -182,7 +183,7 @@ func saveToCSV(filePath string, records [][]string) error {
 func main() {
 	rateLimiter := NewRateLimiter(maxReqPerMin)
 
-	symbols := []string{"BTCUSDT", "ETHUSDT", "BNBUSDT"}
+	symbols := []string{"ETHUSDC", "ETHUSDT", "ETHBTC"}
 	var wg sync.WaitGroup
 
 	for _, symbol := range symbols {
