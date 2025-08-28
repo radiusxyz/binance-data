@@ -183,7 +183,7 @@ func saveToCSV(filePath string, records [][]string) error {
 func main() {
 	rateLimiter := NewRateLimiter(maxReqPerMin)
 
-	symbols := []string{"ETHUSDC", "ETHUSDT", "ETHBTC"}
+	symbols := []string{"USDCUSDT"}
 	var wg sync.WaitGroup
 
 	for _, symbol := range symbols {
